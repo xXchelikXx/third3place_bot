@@ -30,13 +30,13 @@ def info_selection(message):
 @bot.message_handler(func=lambda message: True)
 def command_processing(message):
     if message.text == '😴 Каникулы и оплата 💵':
-        bot.send_message(message.chat.id, text=text.get('holidays_and_pay')) # получение текста из словаря text и вывод
+        bot.send_message(CHAT_ID, text=text.get('holidays_and_pay')) # получение текста из словаря text и вывод
     elif message.text == '🧑‍💻 Хакатон и Интенсив 🧑‍💻':
-        bot.send_message(message.chat.id, text=text.get('events')) # получение текста из словаря text и вывод
+        bot.send_message(CHAT_ID, text=text.get('events')) # получение текста из словаря text и вывод
     elif message.text == '📕 Основная информация 📕':
-        bot.send_message(message.chat.id, text=text.get('main_info')) # получение текста из словаря text и вывод
+        bot.send_message(CHAT_ID, text=text.get('main_info')) # получение текста из словаря text и вывод
     elif message.text == '👨‍🏫 Связь и кураторская поддержка 👨‍🏫':
-        bot.send_message(message.chat.id, text=text.get('interactions')) # получение текста из словаря text и вывод
+        bot.send_message(CHAT_ID, text=text.get('interactions')) # получение текста из словаря text и вывод
     else:
         bot.send_message(CHAT_ID, text='⚠️ Не найдено функции для данной команды ⚠️')
 
