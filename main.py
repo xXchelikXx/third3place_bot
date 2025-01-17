@@ -1,7 +1,6 @@
-
-
 import telebot
 from telebot import types
+from text import text # взятие текста из text.py
 
 API_TOKEN = '7616075220:AAFpvIg2w0C-uWVDZYMF7k9SANMSH9WM77U'
 CHAT_ID = '@third3bot_tgc'
@@ -20,8 +19,8 @@ def send_welcome(message):
 @bot.message_handler(commands=['info'])
 def info_selection(message):
     markup = types.ReplyKeyboardMarkup(row_width=2)
-    main_info = types.KeyboardButton('📕 Основная информация 📕') # информация о компании и обучении
-    interactions = types.KeyboardButton('👨‍🏫 Связь и кураторская поддержка 👨‍🏫') # Информация про дискорд и кураторская поддержка
+    main_info = types.KeyboardButton('📕 Основная информация 📕')
+    interactions = types.KeyboardButton('👨‍🏫 Связь и кураторская поддержка 👨‍🏫')
     events = types.KeyboardButton('🧑‍💻 Хакатон и Интенсив 🧑‍💻')
     holidays_and_pay = types.KeyboardButton('😴 Каникулы и оплата 💵')
     markup.add(main_info, interactions, events, holidays_and_pay)
@@ -29,10 +28,15 @@ def info_selection(message):
 
 
 @bot.message_handler(func=lambda message: True)
-def holidays_and_pay_func(message):
+def command_processing(message):
     if message.text == '😴 Каникулы и оплата 💵':
-        photo = open('pay.jpg', 'rb')
-        bot.send_photo(CHAT_ID, photo, caption="Вот как производится оплата:")
+        bot.send_message(message.chat.id, text=text.get('holidays_and_pay')) # получение текста из словаря text и вывод
+    elif message.text == '🧑‍💻 Хакатон и Интенсив 🧑‍💻':
+        bot.send_message(message.chat.id, text=text.get('events')) # получение текста из словаря text и вывод
+    elif message.text == '📕 Основная информация 📕':
+        bot.send_message(message.chat.id, text=text.get('main_info')) # получение текста из словаря text и вывод
+    elif message.text == '👨‍🏫 Связь и кураторская поддержка 👨‍🏫':
+        bot.send_message(message.chat.id, text=text.get('interactions')) # получение текста из словаря text и вывод
     else:
         bot.send_message(CHAT_ID, text='⚠️ Не найдено функции для данной команды ⚠️')
 
@@ -43,10 +47,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-#@bot.message_handler(commands=['question'])
-#def support(message):
-#    inline_btn_1 = InlineKeyboardButton('Первая кнопка!', callback_data='button1')
-#    inline_kb1 = InlineKeyboardMarkup().add(inline_btn_1)
-#    bot.reply_to(message, text='Задайте интересующий вас вопрос:', )
