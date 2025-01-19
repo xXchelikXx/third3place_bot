@@ -1,5 +1,7 @@
 import telebot
 from telebot import types
+
+from responses import responses
 from text import text
 
 API_TOKEN = '7616075220:AAFpvIg2w0C-uWVDZYMF7k9SANMSH9WM77U'
@@ -16,6 +18,20 @@ def send_welcome(message):
 """)
 
 
+@bot.message_handler(commands=['question'])
+def tech_support(message):
+    msg = bot.send_message(message.chat.id, 'Напиши вопрос, а мы попробуем ответить:')
+    bot.register_next_step_handler(msg, responding)
+
+
+def responding(message):
+    question = message.text
+    if question.lower() in responses:
+        bot.send_message(CHAT_ID, text=responses[question.lower()])
+    else:
+        pass
+
+
 @bot.message_handler(commands=['info'])
 def info_selection(message):
     markup = types.ReplyKeyboardMarkup(row_width=2, one_time_keyboard=True)
@@ -26,6 +42,8 @@ def info_selection(message):
     back_button = types.KeyboardButton('Отмена')
     markup.add(main_info, interactions, events, holidays_and_pay, back_button)
     bot.send_message(message.chat.id, "Выберите раздел:", reply_markup=markup)
+
+
 
 
 @bot.message_handler(func=lambda message: True)
