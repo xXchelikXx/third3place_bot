@@ -1,10 +1,9 @@
 import telebot
 from telebot import types
-
 from text import text
 
+
 API_TOKEN = '7616075220:AAFpvIg2w0C-uWVDZYMF7k9SANMSH9WM77U'
-CHAT_ID = '@third3bot_tgc'
 ADMINS_CHAT_ID = '@tech_support_thirdplace'
 COMMANDS = [
     '📕 Основная информация 📕',
@@ -31,7 +30,6 @@ def send_welcome(message):
     bot.reply_to(message, """
 Привет, это бот-проект школы "Третье Место". здесь ты можешь узнать необходимую для тебя информацию о школе.
 /info - Получить информацию
-/question - Задать вопрос
 """)
 
 
@@ -46,8 +44,6 @@ def info_selection(message):
     back_button = types.KeyboardButton('Отмена')
     markup.add(main_info, interactions, events, holidays_and_pay, question_button, back_button)
     bot.send_message(message.chat.id, "Выберите раздел:", reply_markup=markup)
-
-
 
 
 @bot.message_handler(func=lambda message: True)
