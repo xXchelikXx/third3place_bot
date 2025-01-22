@@ -1,3 +1,0 @@
-responses = {
-    'test': 'responding test'
-}
