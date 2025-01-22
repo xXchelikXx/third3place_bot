@@ -1,9 +1,29 @@
 import telebot
 from telebot import types
 from text import text
+from dotenv import load_dotenv
+import os
 
-API_TOKEN = '7616075220:AAFpvIg2w0C-uWVDZYMF7k9SANMSH9WM77U'
-CHAT_ID = '@third3bot_tgc'
+load_dotenv()
+API_TOKEN = os.getenv('API_TOKEN')
+ADMINS_CHAT_ID = os.getenv('ADMINS_CHAT_ID')
+COMMANDS = [
+    '📕 Основная информация 📕',
+    '👨‍🏫 Связь и кураторская поддержка 👨‍🏫',
+    '🧑‍💻 Хакатон и Интенсив 🧑‍💻',
+    '😴 Каникулы и оплата 💵',
+    '💲 Оплата 💸',
+    '🌞 Каникулы 😎',
+    '🧑‍💻 Хакатон 🏅',
+    '🏃 Интенсив 👨‍💻',
+    '🏢 Информация о компании 🧑‍💻',
+    '🧑‍🎓 Обучение 📖',
+    '💬 Информация про дискорд 👨‍🏫',
+    '🤗 Кураторская поддержка 👋',
+    '❓ Не нашли ответа на свой вопрос? ❓',
+    'Написать вопрос',
+    'Отмена'
+]
 bot = telebot.TeleBot(API_TOKEN)
 
 
